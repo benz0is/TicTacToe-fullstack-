@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-// export default function Data(props)
 export default function Data(props) {
   const [gameData, setGameData] = useState([]);
   var histori = [];
   useEffect(() => {
-    fetch("/todos")
+    fetch("http://localhost:5000/todos")
       .then((res) => res.json())
       .then((data) => setGameData(data));
   });
@@ -16,6 +15,7 @@ export default function Data(props) {
       <div>
         {gameData.rows !== undefined
           ? console.log(
+              // eslint-disable-next-line
               Object.values(gameData.rows[0].description).map((i) => {
                 if (i === "x" || i === "o") {
                   histori.push(i);

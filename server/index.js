@@ -1,12 +1,40 @@
 const express = require("express");
 const app = express();
 const pool = require("./db");
-const pg = require("pg");
+const bodyParser = require("body-parser");
+const Pool = require("pg").Pool;
 // pg.connect("postgres://postgres:admin@localhost:5432/index");
 
 app.use(express.json()); // =>req.body
-
-//Routes
+// const pgPool = new Pool(pgConfig);
+// app.use(bodyParser.json());
+// //naujiena, jei neveiks kažkas bus to kaltė body parserio:
+// const pgPool = new Pool();
+// async function connect() {
+//   for (let nRetry = 1; ; nRetry++) {
+//     try {
+//       const client = await pgPool.connect();
+//       if (nRetry > 1) {
+//         console.info("Now successfully connected to Postgres");
+//       }
+//       return client;
+//     } catch (e) {
+//       if (e.toString().includes("ECONNREFUSED") && nRetry < 5) {
+//         console.info(
+//           "ECONNREFUSED connecting to Postgres, " +
+//             "maybe container is not ready yet, will retry " +
+//             nRetry
+//         );
+//         // Wait 1 second
+//         await new Promise((resolve) => setTimeout(resolve, 1000));
+//       } else {
+//         throw e;
+//       }
+//     }
+//   }
+// }
+// connect();
+// //Routes
 
 //get all todos
 app.get("/todos", async (req, res) => {
@@ -19,6 +47,9 @@ app.get("/todos", async (req, res) => {
 });
 
 //get a todo
+app.get("/", (req, res) => {
+  res.json("Works on /");
+});
 
 app.get("/todos/:id", async (req, res) => {
   const { id } = req.params;

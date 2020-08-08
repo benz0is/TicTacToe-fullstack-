@@ -42,7 +42,7 @@ export class Board extends React.Component {
     localStorage.setItem("boxes", JSON.stringify(boxes));
 
     history.push(this.state.xIsNext ? "x" : "o");
-    fetch("/todos/58", {
+    fetch("http://localhost:5000/todos/1", {
       method: "PUT",
       body: JSON.stringify({
         description: history,
@@ -68,7 +68,7 @@ export class Board extends React.Component {
       xIsNext: true,
     });
     localStorage.removeItem("boxes");
-    fetch("/todos/58", {
+    fetch("http://localhost:5000/todos/1", {
       method: "PUT",
       body: JSON.stringify({
         description: "",
@@ -89,7 +89,7 @@ export class Board extends React.Component {
     if (winner) {
       status = `The winner is: ${winner}!`;
       localStorage.removeItem("boxes");
-      fetch("/todos/58", {
+      fetch("http://localhost:5000/todos/1", {
         method: "PUT",
         body: JSON.stringify({
           description: "",
@@ -101,7 +101,7 @@ export class Board extends React.Component {
     } else if (!winner && isFilled) {
       status = "Game drawn!";
       localStorage.removeItem("boxes");
-      fetch("/todos/58", {
+      fetch("http://localhost:5000/todos/1", {
         method: "PUT",
         body: JSON.stringify({
           description: "",
