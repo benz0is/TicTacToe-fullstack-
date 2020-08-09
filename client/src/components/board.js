@@ -13,7 +13,6 @@ export class Board extends React.Component {
       boxes: Array(9).fill(null),
       history: [],
       xIsNext: true,
-      pripe: [],
     };
   }
 

@@ -1,8 +1,10 @@
-import React from "react";
-import Data from "./works";
+import { Works } from "./works";
+import fetchMock from "fetch-mock";
+
+fetchMock.enableMocks();
 
 //check if api is running
-it("Api testing", async function () {
-  var data = await response.api();
-  expect(todo_id).toEqual("58");
+it("Tests whether api is working correctly", async () => {
+  const result = await Works();
+  expect(result).toEqual(1);
 });

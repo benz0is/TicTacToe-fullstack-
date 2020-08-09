@@ -6,6 +6,12 @@ const Pool = require("pg").Pool;
 // pg.connect("postgres://postgres:admin@localhost:5432/index");
 
 app.use(express.json()); // =>req.body
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PATCH, PUT, POST, GET, DELETE, OPTIONS')
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 // const pgPool = new Pool(pgConfig);
 // app.use(bodyParser.json());
 // //naujiena, jei neveiks kažkas bus to kaltė body parserio:
