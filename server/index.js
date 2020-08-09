@@ -3,7 +3,7 @@ const app = express();
 const pool = require("./db");
 const bodyParser = require("body-parser");
 const Pool = require("pg").Pool;
-// pg.connect("postgres://postgres:admin@localhost:5432/index");
+
 
 app.use(express.json()); // =>req.body
 app.use((req, res, next) => {
@@ -12,37 +12,9 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-// const pgPool = new Pool(pgConfig);
-// app.use(bodyParser.json());
-// //naujiena, jei neveiks kažkas bus to kaltė body parserio:
-// const pgPool = new Pool();
-// async function connect() {
-//   for (let nRetry = 1; ; nRetry++) {
-//     try {
-//       const client = await pgPool.connect();
-//       if (nRetry > 1) {
-//         console.info("Now successfully connected to Postgres");
-//       }
-//       return client;
-//     } catch (e) {
-//       if (e.toString().includes("ECONNREFUSED") && nRetry < 5) {
-//         console.info(
-//           "ECONNREFUSED connecting to Postgres, " +
-//             "maybe container is not ready yet, will retry " +
-//             nRetry
-//         );
-//         // Wait 1 second
-//         await new Promise((resolve) => setTimeout(resolve, 1000));
-//       } else {
-//         throw e;
-//       }
-//     }
-//   }
-// }
-// connect();
-// //Routes
 
-//get all todos
+
+
 app.get("/todos", async (req, res) => {
   try {
     const allTodos = await pool.query("SELECT * FROM todo");
@@ -52,7 +24,7 @@ app.get("/todos", async (req, res) => {
   }
 });
 
-//get a todo
+
 app.get("/", (req, res) => {
   res.json("Works on /");
 });
@@ -74,7 +46,7 @@ app.post("/api/console", (req, res) => {
   res.send(req.body);
 });
 
-//create a todo
+
 app.post("/todos", async (req, res) => {
   try {
     const { description } = req.body;
@@ -89,12 +61,12 @@ app.post("/todos", async (req, res) => {
   }
 });
 
-//update a todo
+
 
 app.put("/todos/:id", async (req, res) => {
   try {
-    const { id } = req.params; // where
-    const { description } = req.body; // set
+    const { id } = req.params; 
+    const { description } = req.body; 
     const updateTodo = await pool.query(
       "UPDATE todo SET description = $1 WHERE todo_id = $2",
       [description, id]
@@ -105,7 +77,7 @@ app.put("/todos/:id", async (req, res) => {
   }
 });
 
-//delete a todo
+
 
 app.delete("/todos/:id", async (req, res) => {
   try {
